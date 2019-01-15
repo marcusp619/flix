@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { simpleAction } from '../../actions/simpleAction';
+import Header from '../../components/Header'
+import { createGlobalStyle } from "styled-components";
 import './App.css';
 
 class App extends Component {
@@ -12,12 +14,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <button onClick={this.simpleAction}>Test redux action</button>
-        <pre>
-          {
-            JSON.stringify(this.props)
-          }
-        </pre>
+        <GlobalStyles />
+        <Header />
       </div>
     );
   }
@@ -30,5 +28,12 @@ const mapStateToProps = state => ({
  const mapDispatchToProps = dispatch => ({
   simpleAction: () => dispatch(simpleAction())
  })
+
+ const GlobalStyles = createGlobalStyle`
+    body {
+        @import url('https://fonts.googleapis.com/css?family=Kanit|Roboto');
+        font-family: 'Kanit', sans-serif;
+    }
+` 
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
