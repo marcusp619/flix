@@ -47,7 +47,6 @@ const Header = () => (
 );
 
 const HeaderContainer = styled.header`
-    background: grey;
     display: flex;
     align-items: center;
     justify-content: space-around;

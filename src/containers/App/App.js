@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { simpleAction } from '../../actions/simpleAction';
+import BackgroundVideo from '../../containers/BackgroundVideo'
 import Header from '../../components/Header'
+
+
 import { createGlobalStyle } from "styled-components";
 import './App.css';
 
@@ -16,6 +19,7 @@ class App extends Component {
       <div className="App">
         <GlobalStyles />
         <Header />
+        <BackgroundVideo />
       </div>
     );
   }
