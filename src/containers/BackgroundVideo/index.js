@@ -9,7 +9,7 @@ const BackgroundVideo = () => (
 
 const BackGroundVideo = styled.video.attrs({
   autoPlay: true,
-  loop: true,
+  // loop: true,
   muted: true
 })`
  position: fixed;
@@ -20,6 +20,7 @@ const BackGroundVideo = styled.video.attrs({
  width: auto;
  z-index: -100;
  object-fit: cover;
+//  background: url(polina.jpg) no-repeat;
 `
 
 export default BackgroundVideo;
