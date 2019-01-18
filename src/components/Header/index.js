@@ -7,7 +7,7 @@ import FaceIcon from './FaceIcon.svg'
 import CaretDownIcon from './CaretDownIcon.svg'
 
 const Header = () => {
-    const [isOpen, setOpen] = useState(true)
+    const [isOpen, setOpen] = useState(false)
 
     return (
         <HeaderContainer>
@@ -50,12 +50,13 @@ const Header = () => {
                             flex={'flex'} 
                             align={'center'}
                             onMouseEnter={() => setOpen(true) }
-                            onMouseLeave={() => setOpen(false) }
                             to='/'><Icon src={FaceIcon} /><Icon size={'10px'} src={CaretDownIcon} /></StyledLink>
                         { isOpen &&
                             <UlDropDown>
                                 <LiDropDown>
-                                    <StyledLink to='/'>Sign Out Of Flix</StyledLink>
+                                    <StyledLink 
+                                        onMouseLeave={() => setOpen(false) }
+                                        to='/'>Sign Out Of Flix</StyledLink>
                                 </LiDropDown>
                             </UlDropDown>
                         }
@@ -65,10 +66,12 @@ const Header = () => {
         </HeaderContainer>
     );
 }
+
 const HeaderContainer = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-around;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0));
 `
 const Icon = styled.img`
     width: ${props => props.size || '20px'};
@@ -81,11 +84,11 @@ const Ul = styled.ul`
     justify-content: space-between;
     list-style-type: none;
 `
-
 const UlDropDown = styled.ul`
     transition: all 0.5s ease;
-    margin-top: 1rem;
-    left: 0;
+    margin-top: .5rem;
+    position: absolute;
+    right: 75px;
     display: block;
 `
 const HeaderLogo = styled.h2`
