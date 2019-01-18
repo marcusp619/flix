@@ -1,55 +1,70 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SearchIcon from './SearchIcon.svg'
 import BellIcon from './BellIcon.svg'
 import FaceIcon from './FaceIcon.svg'
 import CaretDownIcon from './CaretDownIcon.svg'
 
-const Header = () => (
-  <HeaderContainer>
-      <HeaderLogo>FLIX</HeaderLogo>
-      <Nav marginContent="250px">
-          <Ul>
-              <Li>
-                  <StyledLink to='/'>Home</StyledLink>
-              </Li>
-              <Li>
-                  <StyledLink to='/'>TV Shows</StyledLink>
-              </Li>
-              <Li>
-                  <StyledLink to='/'>Movies</StyledLink>
-              </Li>
-              <Li>
-                  <StyledLink to='/'>Recently Added</StyledLink>
-              </Li>
-              <Li>
-                  <StyledLink to='/'>My List</StyledLink>
-              </Li>
-          </Ul>
-      </Nav>
-      <Nav>
-          <Ul>
-              <Li>
-                  <StyledLink to='/'><Icon src={SearchIcon} /></StyledLink>
-              </Li>
-              <Li>
-                  <StyledLink to='/'>KIDS</StyledLink>
-              </Li>
-              <Li>
-                  <StyledLink to='/'>DVD</StyledLink>
-              </Li>
-              <Li>
-                  <StyledLink to='/'><Icon src={BellIcon} /></StyledLink>
-              </Li>
-              <Li>
-                  <StyledLink flex={'flex'} align={'center'} to='/'><Icon src={FaceIcon} /><Icon size={'10px'} src={CaretDownIcon} /></StyledLink>
-              </Li>
-          </Ul>
-      </Nav>
-  </HeaderContainer>
-);
+const Header = () => {
+    const [isOpen, setOpen] = useState(true)
 
+    return (
+        <HeaderContainer>
+            <HeaderLogo>FLIX</HeaderLogo>
+            <Nav marginContent="250px">
+                <Ul>
+                    <Li>
+                        <StyledLink to='/'>Home</StyledLink>
+                    </Li>
+                    <Li>
+                        <StyledLink to='/'>TV Shows</StyledLink>
+                    </Li>
+                    <Li>
+                        <StyledLink to='/'>Movies</StyledLink>
+                    </Li>
+                    <Li>
+                        <StyledLink to='/'>Recently Added</StyledLink>
+                    </Li>
+                    <Li>
+                        <StyledLink to='/'>My List</StyledLink>
+                    </Li>
+                </Ul>
+            </Nav>
+            <Nav>
+                <Ul>
+                    <Li>
+                        <StyledLink to='/'><Icon src={SearchIcon} /></StyledLink>
+                    </Li>
+                    <Li>
+                        <StyledLink to='/'>KIDS</StyledLink>
+                    </Li>
+                    <Li>
+                        <StyledLink to='/'>DVD</StyledLink>
+                    </Li>
+                    <Li>
+                        <StyledLink to='/'><Icon src={BellIcon} /></StyledLink>
+                    </Li>
+                    <Li>
+                        <StyledLink 
+                            flex={'flex'} 
+                            align={'center'}
+                            onMouseEnter={() => setOpen(true) }
+                            onMouseLeave={() => setOpen(false) }
+                            to='/'><Icon src={FaceIcon} /><Icon size={'10px'} src={CaretDownIcon} /></StyledLink>
+                        { isOpen &&
+                            <UlDropDown>
+                                <LiDropDown>
+                                    <StyledLink to='/'>Sign Out Of Flix</StyledLink>
+                                </LiDropDown>
+                            </UlDropDown>
+                        }
+                    </Li>
+                </Ul>
+            </Nav>
+        </HeaderContainer>
+    );
+}
 const HeaderContainer = styled.header`
     display: flex;
     align-items: center;
@@ -66,6 +81,13 @@ const Ul = styled.ul`
     justify-content: space-between;
     list-style-type: none;
 `
+
+const UlDropDown = styled.ul`
+    transition: all 0.5s ease;
+    margin-top: 1rem;
+    left: 0;
+    display: block;
+`
 const HeaderLogo = styled.h2`
     display: inline;
     border-top: 2px solid  #B9090B;
@@ -74,10 +96,18 @@ const HeaderLogo = styled.h2`
 const Li = styled.li`
     padding-right: 15px;
 `
+const LiDropDown = styled.li`
+    display: block;
+    transition-duration: 0.5;
+    &:hover {
+        cursor: pointer;
+    }
+`
 const StyledLink = styled(Link)`
     text-decoration: none;
     list-style: none;
     color: whtie;
+    cursor: pointer;
     display: ${props => props.flex};
     align-items: ${props => props.align}
     &:hover {
