@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { fetchMovies } from '../../thunks/fetchMovies';
 import BackgroundVideo from '../../containers/BackgroundVideo';
 import Header from '../../components/Header';
-import gql from 'graphql-tag';
 import { createGlobalStyle } from 'styled-components';
 import './App.css';
 
@@ -24,7 +23,6 @@ class App extends Component {
       }
     }
     `
-    console.log(`http://localhost:4000/graphql${query}`)
     this.props.fetchMovies(query)
   }
 
