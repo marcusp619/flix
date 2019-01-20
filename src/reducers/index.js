@@ -1,6 +1,8 @@
-import {combineReducers} from 'redux';
-import simpleReducer from './simpleReducer';
+import { combineReducers } from 'redux';
+import { isLoading, hasErrored, movies } from './moviesReducer';
 
 export const rootReducer = combineReducers({
-  simpleReducer,
+  movies,
+  isLoading,
+  hasErrored
 });
