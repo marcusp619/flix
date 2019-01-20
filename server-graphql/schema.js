@@ -24,6 +24,25 @@ const MovieType = new GraphQLObjectType({
   })
 });
 
+const TVType = new GraphQLObjectType({
+  name: 'TV',
+  fields: () => ({
+    poster_path: { type: GraphQLString },
+    popularity: { type: GraphQLFloat },
+    id: { type: GraphQLID },
+    backdrop_path: { type: GraphQLString },
+    vote_average: { type: GraphQLFloat },
+    overview: { type: GraphQLString },
+    first_air_date: { type: GraphQLString },
+    origin_country: { type: GraphQLList(GraphQLString) },
+    genre_ids: { type: GraphQLList(GraphQLInt) },
+    original_language: { type: GraphQLString },
+    vote_count: { type: GraphQLInt },
+    name: { type: GraphQLString },
+    original_name: { type: GraphQLString }
+  })
+});
+
 const UserType = new GraphQLObjectType({
   name: 'User',
   fields: () => ({
@@ -58,6 +77,13 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(MovieType),
       async resolve(parent, args) {
         const result = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`);
+        return result.data.results;
+      }
+    },
+    tv: {
+      type: new GraphQLList(TVType),
+      async resolve(parent, args) {
+        const result = await axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${key}&language=en-US&page=1`);
         return result.data.results;
       }
     }
