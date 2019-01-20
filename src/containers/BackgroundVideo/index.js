@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 const BackgroundVideo = () => (
@@ -23,4 +24,10 @@ const BackGroundVideo = styled.video.attrs({
   //  background: url(polina.jpg) no-repeat;
 `;
 
-export default BackgroundVideo;
+const mapStateToProps = state => ({
+  movies: state.movies,
+});
+
+export default connect(
+  mapStateToProps,
+)(BackGroundVideo);
