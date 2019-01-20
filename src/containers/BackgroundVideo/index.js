@@ -1,18 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import YouTube from 'react-youtube';
 
-const BackgroundVideo = () => (
-  <BackGroundVideo>
-    <source src="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" />
-  </BackGroundVideo>
-);
+const BackGroundVideo = (props) => {
+  const opts = {
+    height: '900',
+    width: '100%',
+    playerVars: { // https://developers.google.com/youtube/player_parameters
+      autoplay: 1
+    }
+  }
+  return (
+    <div style={{ height: '100vh' }}>
+      <BackgroundVideo
+        videoId="2g811Eo7K8U"
+        opts={opts}
+      />
+    </div>
+  )
+};
 
-const BackGroundVideo = styled.video.attrs({
-  autoPlay: true,
-  // loop: true,
-  muted: true,
-})`
+const BackgroundVideo = styled(YouTube)`
   position: fixed;
   top: -2px;
   left: 0;
@@ -20,8 +29,6 @@ const BackGroundVideo = styled.video.attrs({
   height: 100vh;
   width: auto;
   z-index: -100;
-  object-fit: cover;
-  //  background: url(polina.jpg) no-repeat;
 `;
 
 const mapStateToProps = state => ({
