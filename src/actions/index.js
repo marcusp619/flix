@@ -9,3 +9,7 @@ export const hasErrored = message => ({
   message
 });
 
+export const moviesFetchDataSuccess = movies => ({
+  type: 'MOVIES_FETCH_DATA_SUCCESS',
+  movies
+});
