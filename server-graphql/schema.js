@@ -19,7 +19,13 @@ const MovieType = new GraphQLObjectType({
     backdrop_path: { type: GraphQLString },
     popularity: { type: GraphQLFloat },
     vote_count: { type: GraphQLFloat },
-    video: { type: GraphQLBoolean },
+    videos: {
+      type: GraphQLList(VideoType),
+      async resolve(parent) {
+        const result = await axios.get(`https://api.themoviedb.org/3/movie/${parent.id}/videos?api_key=5cb4969ffac5d2d967beb6c31aa53509&language=en-US`);
+        return result.data.results;
+      }
+    },
     vote_average: { type: GraphQLFloat }
   })
 });
@@ -40,6 +46,21 @@ const TVType = new GraphQLObjectType({
     vote_count: { type: GraphQLInt },
     name: { type: GraphQLString },
     original_name: { type: GraphQLString }
+  })
+});
+
+const VideoType = new GraphQLObjectType({
+  name: 'Video',
+  description: 'Gets the video using the movie ID',
+  fields: () => ({
+    id: { type: GraphQLID },
+    iso_639_1: { type: GraphQLString },
+    iso_3166_1: { type: GraphQLString },
+    key: { type: GraphQLString },
+    name: { type: GraphQLString },
+    site: { type: GraphQLString },
+    size: { type: GraphQLInt },
+    type: { type: GraphQLString },
   })
 });
 
