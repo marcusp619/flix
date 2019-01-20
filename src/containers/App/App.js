@@ -1,16 +1,32 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {simpleAction} from '../../actions/simpleAction';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchMovies } from '../../thunks/fetchMovies';
 import BackgroundVideo from '../../containers/BackgroundVideo';
 import Header from '../../components/Header';
-
-import {createGlobalStyle} from 'styled-components';
+import gql from 'graphql-tag';
+import { createGlobalStyle } from 'styled-components';
 import './App.css';
 
 class App extends Component {
-  simpleAction = event => {
-    this.props.simpleAction();
-  };
+
+  componentDidMount() {
+    const query = `{
+      movies {
+         id
+        title
+        overview
+        videos {
+          id
+          key
+          site
+          type
+        }
+      }
+    }
+    `
+    console.log(`http://localhost:4000/graphql${query}`)
+    this.props.fetchMovies(query)
+  }
 
   render() {
     return (
@@ -24,11 +40,13 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  ...state,
+  movies: state.movies,
+  isLoading: state.isLoading,
+  error: state.error
 });
 
 const mapDispatchToProps = dispatch => ({
-  simpleAction: () => dispatch(simpleAction()),
+  fetchMovies: url => dispatch(fetchMovies(url)),
 });
 
 const GlobalStyles = createGlobalStyle`
