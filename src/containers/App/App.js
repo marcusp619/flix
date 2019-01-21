@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovies } from '../../thunks/fetchMovies';
-import BackgroundVideo from '../../containers/BackgroundVideo';
 import Header from '../../components/Header';
+import BackgroundVideo from '../../containers/BackgroundVideo';
+import MovieList from '../MovieList';
 import { createGlobalStyle } from 'styled-components';
 import './App.css';
 
@@ -13,12 +14,11 @@ class App extends Component {
       movies {
          id
         title
+        poster_path
         overview
         videos {
           id
           key
-          site
-          type
         }
       }
     }
@@ -32,6 +32,7 @@ class App extends Component {
         <GlobalStyles />
         <Header />
         <BackgroundVideo />
+        <MovieList />
       </div>
     );
   }

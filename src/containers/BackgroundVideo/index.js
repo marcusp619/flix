@@ -22,7 +22,7 @@ const BackGroundVideo = (props) => {
 };
 
 const BackgroundVideo = styled(YouTube)`
-  position: fixed;
+  position: absolute;
   top: -2px;
   left: 0;
   min-width: 100%;
