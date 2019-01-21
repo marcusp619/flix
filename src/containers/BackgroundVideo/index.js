@@ -12,7 +12,7 @@ const BackGroundVideo = (props) => {
     }
   }
   return (
-    <div style={{ height: '100vh' }}>
+    <div style={{ height: '90vh' }}>
       <BackgroundVideo
         videoId="2g811Eo7K8U"
         opts={opts}
@@ -26,7 +26,7 @@ const BackgroundVideo = styled(YouTube)`
   top: -2px;
   left: 0;
   min-width: 100%;
-  height: 100vh;
+  height: 90vh;
   width: auto;
   z-index: -100;
 `;
