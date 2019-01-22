@@ -1,16 +1,30 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {simpleAction} from '../../actions/simpleAction';
-import BackgroundVideo from '../../containers/BackgroundVideo';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchMovies } from '../../thunks/fetchMovies';
 import Header from '../../components/Header';
-
-import {createGlobalStyle} from 'styled-components';
+import BackgroundVideo from '../../containers/BackgroundVideo';
+import MovieList from '../MovieList';
+import { createGlobalStyle } from 'styled-components';
 import './App.css';
 
 class App extends Component {
-  simpleAction = event => {
-    this.props.simpleAction();
-  };
+
+  componentDidMount() {
+    const query = `{
+      movies {
+         id
+        title
+        poster_path
+        overview
+        videos {
+          id
+          key
+        }
+      }
+    }
+    `
+    this.props.fetchMovies(query)
+  }
 
   render() {
     return (
@@ -18,17 +32,20 @@ class App extends Component {
         <GlobalStyles />
         <Header />
         <BackgroundVideo />
+        <MovieList />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  ...state,
+  movies: state.movies,
+  isLoading: state.isLoading,
+  error: state.error
 });
 
 const mapDispatchToProps = dispatch => ({
-  simpleAction: () => dispatch(simpleAction()),
+  fetchMovies: url => dispatch(fetchMovies(url)),
 });
 
 const GlobalStyles = createGlobalStyle`
