@@ -14,6 +14,7 @@ const App = props => {
        id
       title
       poster_path
+      backdrop_path
       overview
       videos {
         id
@@ -23,7 +24,7 @@ const App = props => {
   }
   `
 
-  useEffect(() => props.fetchMovies(query), [])
+  useEffect(() => props.fetchMovies(query), [query])
 
   return (
     <div className="App">
