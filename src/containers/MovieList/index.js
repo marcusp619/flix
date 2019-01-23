@@ -4,7 +4,7 @@ import MovieCard from '../../components/MovieCard';
 import styled from 'styled-components';
 
 const MovieList = (props) => {
-  const movieCards = props.movies.map(movie => <MovieCard {...movie} />)
+  const movieCards = props.movies.map((movie, i) => <MovieCard {...movie} key={`${Date.now()}${i}`} />)
 
   return (
     <MovieCardsContainer>
