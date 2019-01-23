@@ -22,7 +22,7 @@ const MovieType = new GraphQLObjectType({
     videos: {
       type: GraphQLList(VideoType),
       async resolve(parent) {
-        const result = await axios.get(`https://api.themoviedb.org/3/movie/${parent.id}/videos?api_key=5cb4969ffac5d2d967beb6c31aa53509&language=en-US`);
+        const result = await axios.get(`https://api.themoviedb.org/3/movie/${parent.id}/videos?api_key=${key}&language=en-US`);
         return result.data.results;
       }
     },

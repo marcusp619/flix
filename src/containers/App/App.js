@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchMovies } from '../../thunks/fetchMovies';
 import Header from '../../components/Header';
@@ -7,35 +7,32 @@ import MovieList from '../MovieList';
 import { createGlobalStyle } from 'styled-components';
 import './App.css';
 
-class App extends Component {
+const App = props => {
 
-  componentDidMount() {
-    const query = `{
-      movies {
-         id
-        title
-        poster_path
-        overview
-        videos {
-          id
-          key
-        }
+  const query = `{
+    movies {
+       id
+      title
+      poster_path
+      overview
+      videos {
+        id
+        key
       }
     }
-    `
-    this.props.fetchMovies(query)
   }
+  `
 
-  render() {
-    return (
-      <div className="App">
-        <GlobalStyles />
-        <Header />
-        <BackgroundVideo />
-        <MovieList />
-      </div>
-    );
-  }
+  useEffect(() => props.fetchMovies(query), [])
+
+  return (
+    <div className="App">
+      <GlobalStyles />
+      <Header />
+      <BackgroundVideo />
+      <MovieList />
+    </div>
+  );
 }
 
 const mapStateToProps = state => ({
