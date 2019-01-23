@@ -78,7 +78,7 @@ const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0));
+  background: rgb(0, 0, 0);
 `;
 const Icon = styled.img`
   width: ${props => props.size || '20px'};
@@ -100,6 +100,7 @@ const UlDropDown = styled.ul`
 `;
 const HeaderLogo = styled.h2`
   display: inline;
+  color: white;
   border-top: 2px solid #b9090b;
   border-bottom: 2px solid #b9090b;
 `;
